@@ -27,17 +27,21 @@ with serial.Serial(port, 115200, timeout=1) as ser:
         end_angle = btoi(41) 
         if end_angle < start_angle:
             a *= np.pi/18000
-            if True:
-                x = np.sin(a) * d
-                y = np.cos(a) * d
-            else:
-                x = np.sin(a) * c
-                y = np.cos(a) * c
+            d *= 0.1 #Scale to cm
+            x = -1 * np.cos(a)
+            y = np.sin(a)
             ax.clear()
-            ax.plot(x,y)
+            ax.plot(x*c,y*c, label="confidence")
+            ax.plot(x*d,y*d, '.', label="distance (cm)")
+            ax.plot([0],[0], 'b+', label="center")
+            ax.legend()
             xlim = ax.get_xlim()
             ylim = ax.get_ylim()
-            max_lim = max(map(abs, (max_lim,0) + xlim + ylim))
+            xlim = max(map(abs, xlim + ylim))
+            if xlim > max_lim:
+                max_lim = xlim
+            elif xlim * 1.5 < max_lim:
+                max_lim *= 0.95
             ax.set_xlim((-max_lim, max_lim))
             ax.set_ylim((-max_lim, max_lim))
             fig.show(False)

@@ -1,0 +1,16 @@
+[Unit]
+After=network-online.target
+Description="Turtlebot3 bringup"
+
+[Service]
+User=marshal #Change to your username on the Pi
+Group=marshal#Change to your username on the Pi
+Type=simple
+Environment=TURTLEBOT3_MODEL=burger
+ExecStart=/bin/bash -c 'source /opt/ros/foxy/setup.bash && ros2 launch turtlebot3_bringup robot.launch.py'
+RemainAfterExit=no
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=default.target

@@ -7,6 +7,7 @@ User=marshal #Change to your username on the Pi
 Group=marshal#Change to your username on the Pi
 Type=simple
 Environment=TURTLEBOT3_MODEL=burger
+Environment=LDS_MODEL=LDS-02
 ExecStart=/bin/bash -c 'source /opt/ros/foxy/setup.bash && ros2 launch turtlebot3_bringup robot.launch.py'
 RemainAfterExit=no
 Restart=on-failure

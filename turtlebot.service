@@ -3,12 +3,12 @@ After=network-online.target
 Description="Turtlebot3 bringup"
 
 [Service]
-User=marshal #Change to your username on the Pi
-Group=marshal#Change to your username on the Pi
+User=ubuntu
+Group=ubuntu
 Type=simple
 Environment=TURTLEBOT3_MODEL=burger
 Environment=LDS_MODEL=LDS-02
-ExecStart=/bin/bash -c 'source /opt/ros/foxy/setup.bash && ros2 launch turtlebot3_bringup robot.launch.py'
+ExecStart=/bin/bash -c 'source /opt/ros/humble/setup.bash && source /home/ubuntu/turtlebot3_ws/install/setup.bash && ros2 launch turtlebot3_bringup robot.launch.py'
 RemainAfterExit=no
 Restart=on-failure
 RestartSec=2s
